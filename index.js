@@ -7,4 +7,5 @@ app.get('/oauth', (req, res) => {
     res.end();
 });
 
-app.listen(3000);
+var PORT = process.env.PORT || 3000;
+app.listen(PORT);
