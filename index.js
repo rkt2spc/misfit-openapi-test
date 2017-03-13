@@ -1,7 +1,8 @@
 var express = require('express');
 var app = express();
 
-app.use((req, res) => {
+app.get('/', (req, res) => res.status(200).end("OK"));
+app.get('/oauth', (req, res) => {
     console.log(req.query);
     res.end();
 });
