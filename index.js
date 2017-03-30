@@ -44,6 +44,7 @@ router.get('/callback', (req, res, next) => {
 // Subscription API
 router.post('/subscription/endpoint', (req, res, next) => {
 
+    console.log(req.body);
     var type = req.body.Type;
     console.log('>>> Message type:', type);
 
