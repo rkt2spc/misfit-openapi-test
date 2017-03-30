@@ -15,7 +15,7 @@ router.get('/login', (req, res, next) => {
     url += 'redirect_uri=https://test-openapi.herokuapp.com/callback' + '&';
     url += 'scope=public,birthday,email';
 
-    res.redirect('?&client_id=&redirect_uri=')
+    res.redirect(url)
 });
 
 // Oauth callback: Exchange authorization_code for token
