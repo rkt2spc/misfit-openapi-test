@@ -10,7 +10,7 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
 app.get('/', (req, res) => res.status(200).end("OK"));
-app.get('/login', (req, res) => res.redirect('https://api.misfitwearables.com/auth/dialog/authorize?response_type=code&client_id=uDHmdBZVZakB8jL2&redirect_uri=mfc-P8ABAdMAhoLuBBoO://authorize'));
+app.get('/login', (req, res) => res.redirect('https://api.misfitwearables.com/auth/dialog/authorize?response_type=code&client_id=uDHmdBZVZakB8jL2&redirect_uri=mfc-P8ABAdMAhoLuBBoO://authorize&scope=public,birthday,email'));
 app.get('/oauth', (req, res) => {
     var code = req.query.code;
     var postBody = {
