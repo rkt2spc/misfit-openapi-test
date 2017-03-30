@@ -3,15 +3,11 @@ var express = require('express');
 var request = require('request');
 var bodyParser = require('body-parser');
 
-var app = express();
-
-app.use(morgan('dev'));
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: true }));
-
-app.get('/', (req, res) => res.status(200).end("OK"));
-app.get('/login', (req, res) => res.redirect('https://api.misfitwearables.com/auth/dialog/authorize?response_type=token&client_id=uDHmdBZVZakB8jL2&client_secret=UlKUAiI2SW9RlK1d3wTlT5ZF9mM8appW&redirect_uri=mfc-P8ABAdMAhoLuBBoO://authorize&scope=public,birthday,email'));
-app.get('/oauth', (req, res) => {
+//===========================================================
+var router = express.Router();
+router.get('/', (req, res) => res.status(200).end("OK"));
+router.get('/login', (req, res) => res.redirect('https://api.misfitwearables.com/auth/dialog/authorize?response_type=token&client_id=uDHmdBZVZakB8jL2&client_secret=UlKUAiI2SW9RlK1d3wTlT5ZF9mM8appW&redirect_uri=mfc-P8ABAdMAhoLuBBoO://authorize&scope=public,birthday,email'));
+router.get('/oauth', (req, res) => {
     var code = req.query.code;
     var postBody = {
         grant_type: 'authorization_code',
@@ -37,13 +33,10 @@ app.get('/oauth', (req, res) => {
             res.status(200).end();
         });
 });
-app.get('/token', (req, res) => {
+router.get('/token', (req, res) => {
     res.status(200).json(req.query);
 });
-
-
-
-app.post('/notification', (req, res) => {
+router.post('/notification', (req, res) => {
 
     if (req.body.SubscribeURL) {
         request.get(subscribeURL, (err, response, body) => {
@@ -61,7 +54,15 @@ app.post('/notification', (req, res) => {
     }
 });
 
-res.status(200).end();
+//===========================================================
+var app = express();
+app.use(morgan('dev'));
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(router);
+app.use((err, req, res, next) => console.log(err));
 
+
+//===========================================================
 var PORT = process.env.PORT || 3000;
-app.listen(PORT);
+app.listen(PORT, () => console.log('Server is listening on', PORT));
