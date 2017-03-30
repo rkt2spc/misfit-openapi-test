@@ -42,7 +42,8 @@ router.get('/callback', (req, res, next) => {
 });
 
 // Subscription API
-router.post('/notification', (req, res, next) => {
+router.post('/subscription/endpoint', (req, res, next) => {
+    
     if (req.body.Type === 'SubscriptionConfirmation') {
         console.log('SubscriptionConfirmation');
         console.log(req.body);
