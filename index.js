@@ -10,7 +10,7 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
 app.get('/', (req, res) => res.status(200).end("OK"));
-app.get('/login', (req, res) => res.redirect('https://api.misfitwearables.com/auth/dialog/authorize?response_type=code&client_id=uDHmdBZVZakB8jL2&redirect_uri=https://test-openapi.herokuapp.com/oauth&scope=public,birthday,email'));
+app.get('/login', (req, res) => res.redirect('https://api.misfitwearables.com/auth/dialog/authorize?response_type=code&client_id=uDHmdBZVZakB8jL2&redirect_uri=mfc-P8ABAdMAhoLuBBoO://authorize'));
 app.get('/oauth', (req, res) => {
     var code = req.query.code;
     var postBody = {
@@ -37,6 +37,8 @@ app.get('/oauth', (req, res) => {
             res.status(200).end();
         });
 });
+
+
 
 app.post('/notification', (req, res) => {
     console.log(req.body);
