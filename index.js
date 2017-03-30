@@ -20,9 +20,9 @@ app.get('/oauth', (req, res) => {
                 res.status(500).end(err.toString());
             }
 
-            require('fs').writeFileSync('token.json', JSON.parse(body));
-            console.log(body);
+            require('fs').writeFileSync('token.json', JSON.stringify(body));
             res.status(200).end();
+            console.log(body);
         });
 });
 
