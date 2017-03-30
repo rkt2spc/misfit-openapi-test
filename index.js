@@ -43,25 +43,31 @@ router.get('/callback', (req, res, next) => {
 
 // Subscription API
 router.post('/subscription/endpoint', (req, res, next) => {
-    
-    if (req.body.Type === 'SubscriptionConfirmation') {
-        console.log('SubscriptionConfirmation');
-        console.log(req.body);
-        request.get({
-            url: req.body.SubscribeURL,
+
+    var type = req.body.Type;
+    console.log('>>> Message type:', type);
+
+    if (type === 'SubscriptionConfirmation') {
+
+        var subscribeURL = req.body.SubscribeURL;
+        var options = {
+            url: subscribeURL,
             headers: { verify_token: req.body.Token }
-        }, (err, response, body) => {
-            if (err) return next(err);
+        };
+
+        console.log(">>> Replying to " + subscribeURL);
+        request.get(options, function (err, response, body) {
+            if (err) {
+                return res.status(500).json(err.message);
+            }
 
             console.log(body);
-            console.log('Subscription success');
-            res.status(200).json({});
+            return res.status(200).json({});
         });
     }
     else {
-        console.log('Notification');
         console.log(req.body);
-        res.status(200).end();
+        res.status(200).json({});
     }
 });
 
