@@ -6,9 +6,10 @@ var bodyParser = require('body-parser');
 //===========================================================
 var router = express.Router();
 router.get('/', (req, res) => res.status(200).end("OK"));
-router.get('/login', (req, res) => res.redirect('https://api.misfitwearables.com/auth/dialog/authorize?response_type=token&client_id=uDHmdBZVZakB8jL2&client_secret=UlKUAiI2SW9RlK1d3wTlT5ZF9mM8appW&redirect_uri=https://test-openapi.herokuapp.com/oauth&scope=public,birthday,email'));
+router.get('/login', (req, res) => res.redirect('https://api.misfitwearables.com/auth/dialog/authorize?response_type=code&client_id=uDHmdBZVZakB8jL2&redirect_uri=https://test-openapi.herokuapp.com/oauth&scope=public,birthday,email'));
 router.get('/oauth', (req, res) => {
     var code = req.query.code;
+    console.log(code);
     var postBody = {
         grant_type: 'authorization_code',
         client_id: 'uDHmdBZVZakB8jL2',
