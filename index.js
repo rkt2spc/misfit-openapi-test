@@ -15,7 +15,7 @@ app.get('/oauth', (req, res) => {
     console.log(req.body);
     res.end();
 });
-app.post('/subscribe', (req, res) => {
+app.post('/notification', (req, res) => {
     var subscribeURL = req.body.SubscribeURL; 
     request.get(subscribeURL, (err, response, body) => {
         if (err)
