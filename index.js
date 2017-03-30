@@ -25,10 +25,6 @@ app.get('/oauth', (req, res) => {
             res.status(200).end();
         });
 });
-app.get('/token')
-app.get('/dashboard', (req, res) => {
-
-});
 
 app.post('/notification', (req, res) => {
     console.log(req.body);
