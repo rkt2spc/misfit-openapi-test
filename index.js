@@ -44,22 +44,24 @@ app.get('/token', (req, res) => {
 
 
 app.post('/notification', (req, res) => {
-    console.log(req.body);
-    res.status(200).end();
+
+    if (req.body.SubscribeURL) {
+        request.get(subscribeURL, (err, response, body) => {
+            if (err)
+                return console.log(err);
+
+            console.log(body);
+            console.log('Subscription success');
+            res.status(200).end('OK');
+        });
+    }
+    else {
+        console.log(req.body);
+        res.status(200).end();
+    }
 });
 
-// app.post('/notification', (req, res) => {
-//     var subscribeURL = req.body.SubscribeURL; 
-
-//     request.get(subscribeURL, (err, response, body) => {
-//         if (err)
-//             return console.log(err);
-
-//         console.log(body);
-//         console.log('Subscription success');
-//         res.status(200).end();
-//     });
-// });
+res.status(200).end();
 
 var PORT = process.env.PORT || 3000;
 app.listen(PORT);
