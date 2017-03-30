@@ -4,8 +4,8 @@ var request = require('request');
 var bodyParser = require('body-parser');
 var configs = require('./configs.json');
 
-//===========================================================
 var router = express.Router();
+//===========================================================
 router.get('/', (req, res, next) => res.status(200).end("OK"));
 
 // Oauth login: Get authorization_code
@@ -41,19 +41,20 @@ router.get('/callback', (req, res, next) => {
         });
 });
 
+//===========================================================
 // Subscription API
 router.post('/subscription/endpoint', (req, res, next) => {
 
-    console.log(req);
-    var type = req.body.Type;
+    var message = JSON.parse(req.body)
+    var type = message.Type;
     console.log('>>> Message type:', type);
 
     if (type === 'SubscriptionConfirmation') {
 
-        var subscribeURL = req.body.SubscribeURL;
+        var subscribeURL = message.SubscribeURL;
         var options = {
             url: subscribeURL,
-            headers: { verify_token: req.body.Token }
+            headers: { verify_token: message.Token }
         };
 
         console.log(">>> Replying to " + subscribeURL);
@@ -62,12 +63,12 @@ router.post('/subscription/endpoint', (req, res, next) => {
                 return res.status(500).json(err.message);
             }
 
-            console.log(body);
+            console.log(response.body);
             return res.status(200).json({});
         });
     }
     else {
-        console.log(req.body);
+        console.log(message);
         res.status(200).json({});
     }
 });
