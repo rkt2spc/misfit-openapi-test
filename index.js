@@ -13,6 +13,7 @@ app.get('/', (req, res) => res.status(200).end("OK"));
 app.get('/login', (req, res) => res.redirect('https://api.misfitwearables.com/auth/dialog/authorize?response_type=code&client_id=uDHmdBZVZakB8jL2&redirect_uri=https://test-openapi.herokuapp.com/oauth&scope=public,birthday,email'));
 app.get('/oauth', (req, res) => {
     var code = req.query.code;
+    console.log(code);
     request.post(`https://api.misfitwearables.com/auth/tokens/exchange?grant_type=authorization_code&client_id=uDHmdBZVZakB8jL2&client_secret=UlKUAiI2SW9RlK1d3wTlT5ZF9mM8appW&code=${code}&redirect_uri=https://test-openapi.herokuapp.com/oauth`, 
         (err, response, body) => {
             if (err) {
@@ -20,6 +21,7 @@ app.get('/oauth', (req, res) => {
                 res.status(500).end(err.toString());
             }
 
+            console.log('I am here');
             require('fs').writeFileSync('token.json', JSON.stringify(body));
             res.status(200).end();
             console.log(body);
