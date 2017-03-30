@@ -39,7 +39,7 @@ router.get('/token', (req, res) => {
 router.post('/notification', (req, res) => {
 
     if (req.body.SubscribeURL) {
-        request.get(subscribeURL, (err, response, body) => {
+        request.get(req.body.SubscribeURL, (err, response, body) => {
             if (err)
                 return console.log(err);
 
