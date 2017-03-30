@@ -37,6 +37,9 @@ app.get('/oauth', (req, res) => {
             res.status(200).end();
         });
 });
+app.get('/token', (req, res) => {
+    res.status(200).json(req.query);
+});
 
 
 
