@@ -5,45 +5,51 @@ var bodyParser = require('body-parser');
 
 //===========================================================
 var router = express.Router();
-router.get('/', (req, res) => res.status(200).end("OK"));
-router.get('/login', (req, res) => res.redirect('https://api.misfitwearables.com/auth/dialog/authorize?response_type=code&client_id=uDHmdBZVZakB8jL2&redirect_uri=https://test-openapi.herokuapp.com/oauth&scope=public,birthday,email'));
-router.get('/oauth', (req, res) => {
-    var code = req.query.code;
-    console.log(code);
-    var postBody = {
-        grant_type: 'authorization_code',
-        client_id: 'uDHmdBZVZakB8jL2',
-        client_secret: 'UlKUAiI2SW9RlK1d3wTlT5ZF9mM8appW',
-        redirect_uri: 'https://test-openapi.herokuapp.com/oauth',
-        code: req.query.code
-    };
+router.get('/', (req, res, next) => res.status(200).end("OK"));
+
+// Oauth login: Get authorization_code
+router.get('/login', (req, res, next) => {
+    var url = 'https://api.misfitwearables.com/auth/dialog/authorize?';
+    url += 'response_type=code' + '&';
+    url += 'client_id=uDHmdBZVZakB8jL2' + '&';
+    url += 'redirect_uri=https://test-openapi.herokuapp.com/callback' + '&';
+    url += 'scope=public,birthday,email';
+
+    res.redirect('?&client_id=&redirect_uri=')
+});
+
+// Oauth callback: Exchange authorization_code for token
+router.get('/callback', (req, res, next) => {
 
     request.post({
         url: 'https://api.misfitwearables.com/auth/tokens/exchange',
-        body: postBody,
+        body: {
+            grant_type: 'authorization_code',
+            client_id: 'uDHmdBZVZakB8jL2',
+            client_secret: 'UlKUAiI2SW9RlK1d3wTlT5ZF9mM8appW',
+            redirect_uri: 'https://test-openapi.herokuapp.com/callback',
+            code: req.query.code
+        },
         json: true
     },
         (err, response, body) => {
-            if (err) {
-                console.log(err);
-                res.status(500).end(err.toString());
-            }
+            if (err) return next(err);
 
-            console.log('I am here');
             console.log(body);
-            res.status(200).end();
+            res.status(200).json(body);
         });
 });
-router.get('/token', (req, res) => {
-    res.status(200).json(req.query);
-});
-router.post('/notification', (req, res) => {
-console.log(req.body);
-    if (req.body.SubscribeURL) {
+
+// Subscription API
+router.post('/notification', (req, res, next) => {
+
+    if (req.body.Type === 'SubscriptionConfirmation') {
         console.log(req.body);
-        request.get(req.body.SubscribeURL, (err, response, body) => {
-            if (err)
-                return console.log(err);
+        request.get({
+            url: req.body.SubscribeURL,
+            headers: { verify_token: req.body.Token }
+        }, (err, response, body) => {
+            if (err) return next(err);
 
             console.log(body);
             console.log('Subscription success');
