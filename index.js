@@ -54,7 +54,7 @@ router.post('/notification', (req, res, next) => {
 
             console.log(body);
             console.log('Subscription success');
-            res.status(200).end('OK');
+            res.status(200).json({});
         });
     }
     else {
@@ -70,7 +70,10 @@ app.use(morgan('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(router);
-app.use((err, req, res, next) => console.log(err));
+app.use((err, req, res, next) => {
+    console.log(err);
+    res.status(500).end(err.message);
+});
 
 
 //===========================================================
