@@ -43,7 +43,7 @@ router.get('/callback', (req, res, next) => {
 
 // Subscription API
 router.post('/notification', (req, res, next) => {
-
+    console.log(req.body);
     if (req.body.Type === 'SubscriptionConfirmation') {
         console.log(req.body);
         request.get({
