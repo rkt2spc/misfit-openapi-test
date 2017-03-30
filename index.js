@@ -75,8 +75,8 @@ router.post('/subscription/endpoint', (req, res, next) => {
 //===========================================================
 var app = express();
 app.use(morgan('dev'));
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: true }));
+// app.use(bodyParser.json());
+// app.use(bodyParser.urlencoded({ extended: true }));
 app.use(router);
 app.use((err, req, res, next) => {
     console.log(err);
