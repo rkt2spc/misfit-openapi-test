@@ -2,6 +2,7 @@ var morgan = require('morgan');
 var express = require('express');
 var request = require('request');
 var bodyParser = require('body-parser');
+var configs = require('./configs.json');
 
 //===========================================================
 var router = express.Router();
@@ -11,7 +12,7 @@ router.get('/', (req, res, next) => res.status(200).end("OK"));
 router.get('/login', (req, res, next) => {
     var url = 'https://api.misfitwearables.com/auth/dialog/authorize?';
     url += 'response_type=code' + '&';
-    url += 'client_id=uDHmdBZVZakB8jL2' + '&';
+    url += `client_id=${configs.client_id}` + '&';
     url += 'redirect_uri=https://test-openapi.herokuapp.com/callback' + '&';
     url += 'scope=public,birthday,email';
 
@@ -25,8 +26,8 @@ router.get('/callback', (req, res, next) => {
         url: 'https://api.misfitwearables.com/auth/tokens/exchange',
         body: {
             grant_type: 'authorization_code',
-            client_id: 'uDHmdBZVZakB8jL2',
-            client_secret: 'UlKUAiI2SW9RlK1d3wTlT5ZF9mM8appW',
+            client_id: configs.client_id,
+            client_secret: configs.client_secret,
             redirect_uri: 'https://test-openapi.herokuapp.com/callback',
             code: req.query.code
         },
