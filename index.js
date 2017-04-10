@@ -57,6 +57,8 @@ router.post('/subscription/endpoint', (req, res, next) => {
             headers: { verify_token: message.Token }
         };
 
+        console.log(subscribeURL);
+
         console.log(">>> Replying to " + subscribeURL);
         request.get(options, function (err, response, body) {
             if (err) {
