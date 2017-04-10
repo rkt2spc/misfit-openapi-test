@@ -45,7 +45,7 @@ router.get('/callback', (req, res, next) => {
 // Subscription API
 router.post('/subscription/endpoint', (req, res, next) => {
 
-    console.log(body);
+    console.log(req);
 
     var message = JSON.parse(req.body);
     var type = message.Type;
@@ -80,6 +80,7 @@ router.post('/subscription/endpoint', (req, res, next) => {
 //===========================================================
 var app = express();
 app.use(morgan('dev'));
+app.use(bodyParser.raw());
 app.use(bodyParser.text());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
