@@ -73,7 +73,7 @@ router.post('/subscription/endpoint', (req, res, next) => {
 
     if (type === 'SubscriptionConfirmation') {
 
-        return res.status(200).end('Hok confirm');
+        console.log(req);
 
         var subscribeURL = message.SubscribeURL;
         var options = {
