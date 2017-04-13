@@ -67,6 +67,8 @@ router.post('/subscription/endpoint', (req, res, next) => {
     console.log(">>> Request Headers");
     console.log(req.headers);
 
+    return res.status(200).end('GEGE');
+
     var message = req.body;
     var type = message.Type;
     console.log('>>> Message type:', type);
@@ -101,7 +103,7 @@ router.post('/subscription/endpoint', (req, res, next) => {
 var app = express();
 app.use(morgan('dev'));
 // app.use(bodyParser.raw());
-app.use(bodyParser.text());
+// app.use(bodyParser.text());
 // app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(router);
