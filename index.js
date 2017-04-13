@@ -67,15 +67,13 @@ router.post('/subscription/endpoint', (req, res, next) => {
     console.log(">>> Request Headers");
     console.log(req.headers);
 
-    return res.status(200).end('GEGE');
-
     var message = req.body;
     var type = message.Type;
     console.log('>>> Message type:', type);
 
     if (type === 'SubscriptionConfirmation') {
 
-        console.log(req);
+        // console.log(req);
 
         var subscribeURL = message.SubscribeURL;
         var options = {
@@ -89,7 +87,7 @@ router.post('/subscription/endpoint', (req, res, next) => {
                 return res.status(500).json(err.message);
             }
 
-            console.log(response.body);
+            // console.log(response.body);
             return res.status(200).json({});
         });
     }
