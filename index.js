@@ -102,7 +102,7 @@ var app = express();
 app.use(morgan('dev'));
 // app.use(bodyParser.raw());
 // app.use(bodyParser.text());
-// app.use(bodyParser.json());
+app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(router);
 app.use((err, req, res, next) => {
