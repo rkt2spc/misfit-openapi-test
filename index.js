@@ -81,8 +81,6 @@ router.post('/subscription/endpoint', (req, res, next) => {
             headers: { verify_token: message.Token }
         };
 
-        console.log(subscribeURL);
-
         console.log(">>> Replying to " + subscribeURL);
         request.get(options, function (err, response, body) {
             if (err) {
@@ -102,8 +100,8 @@ router.post('/subscription/endpoint', (req, res, next) => {
 //===========================================================
 var app = express();
 app.use(morgan('dev'));
-app.use(bodyParser.raw());
-app.use(bodyParser.text());
+// app.use(bodyParser.raw());
+// app.use(bodyParser.text());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(router);
