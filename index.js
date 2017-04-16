@@ -26,7 +26,7 @@ router.get('/login', (req, res, next) => {
 router.get('/callback', (req, res, next) => {
 
     request.post({
-        url: 'https://api.misfitwearables.com/auth/tokens/exchange',
+        url: configs.exchange_url,
         body: {
             grant_type: 'authorization_code',
             client_id: configs.client_id,
@@ -46,16 +46,16 @@ router.get('/callback', (req, res, next) => {
 
 //===========================================================
 // Thirdparty OAuth
-router.get('/login3', (req, res, next) => {
-    var url = configs.thirdparty.dialog_url;
-    url += '?response_type=code' + '&';
-    url += `client_id=${configs.thirdparty.client_id}` + '&';
-    url += `client_secret=${configs.thirdparty.client_secret}` + '&';
-    url += 'redirect_uri=' + configs.thirdparty.redirect_uri + '&';
-    url += 'scope=public,birthday,email';
+// router.get('/login3', (req, res, next) => {
+//     var url = configs.thirdparty.dialog_url;
+//     url += '?response_type=code' + '&';
+//     url += `client_id=${configs.thirdparty.client_id}` + '&';
+//     url += `client_secret=${configs.thirdparty.client_secret}` + '&';
+//     url += 'redirect_uri=' + configs.thirdparty.redirect_uri + '&';
+//     url += 'scope=public,birthday,email';
 
-    res.redirect(url);    
-});
+//     res.redirect(url);    
+// });
 
 //===========================================================
 // Subscription API
