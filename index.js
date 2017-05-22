@@ -87,7 +87,7 @@ router.post('/subscription/endpoint', (req, res, next) => {
     console.log(">>> Request Headers");
     console.log(req.headers);
 
-    var message = req.body;
+    var message = JSON.parse(req.body);
     var type = message.Type;
     console.log('>>> Message type:', type);
 
