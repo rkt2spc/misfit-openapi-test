@@ -87,7 +87,8 @@ router.post('/subscription/endpoint', (req, res, next) => {
     console.log(">>> Request Headers");
     console.log(req.headers);
 
-    var message = JSON.parse(req.body);
+    var message = req.body;
+    if (typeof message === 'string') message = JSON.parse(message);
     var type = message.Type;
     console.log('>>> Message type:', type);
 
@@ -123,8 +124,7 @@ app.use(morgan('dev'));
 // app.use(bodyParser.raw());
 app.use(bodyParser.text());
 app.use(bodyParser.json());
-// app.use(bodyParser.json());
-// app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.urlencoded({ extended: true }));
 app.use(router);
 app.use((err, req, res, next) => {
     console.log(err);
