@@ -46,16 +46,36 @@ router.get('/callback', (req, res, next) => {
 
 //===========================================================
 // Thirdparty OAuth
-// router.get('/login3', (req, res, next) => {
-//     var url = configs.thirdparty.dialog_url;
-//     url += '?response_type=code' + '&';
-//     url += `client_id=${configs.thirdparty.client_id}` + '&';
-//     url += `client_secret=${configs.thirdparty.client_secret}` + '&';
-//     url += 'redirect_uri=' + configs.thirdparty.redirect_uri + '&';
-//     url += 'scope=public,birthday,email';
+router.get('/login_thirdparty', (req, res, next) => {
+    var url = configs.thirdparty.dialog_url;
+    url += '?response_type=code' + '&';
+    url += `client_id=${configs.thirdparty.client_id}` + '&';
+    url += `client_secret=${configs.thirdparty.client_secret}` + '&';
+    url += 'redirect_uri=' + configs.thirdparty.redirect_uri + '&';
+    url += 'scope=public,birthday,email';
 
-//     res.redirect(url);    
-// });
+    res.redirect(url);    
+});
+
+router.get('/callback_thirdparty', (req, res, next) => {
+    request.post({
+        url: configs.thirdparty.exchange_url,
+        body: {
+            grant_type: 'authorization_code',
+            client_id: configs.thirdparty.client_id,
+            client_secret: configs.thirdparty.client_secret,
+            redirect_uri: configs.thirdparty.redirect_uri,
+            code: req.query.code
+        },
+        json: true
+    },
+        (err, response, body) => {
+            if (err) return next(err);
+
+            console.log(body);
+            res.status(200).json(body);
+        });
+});
 
 //===========================================================
 // Subscription API
@@ -113,4 +133,4 @@ app.use((err, req, res, next) => {
 
 //===========================================================
 var PORT = process.env.PORT || 3000;
-app.listen(PORT, () => console.log('Server is listening on', PORT));
+app.listen(PORT, () => console.log('Server is listening on', `http://localhost:${PORT}`));
