@@ -16,6 +16,7 @@
     "lodash": "^4.17.4",
     "mongoose": "^4.9.4",
     "morgan": "^1.8.1",
+    "node-yaml-config": "0.0.4",
     "oauth": "^0.9.15",
     "request": "^2.81.0",
     "uuid": "^3.0.1"

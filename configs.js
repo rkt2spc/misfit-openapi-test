@@ -1,11 +1,11 @@
 module.exports = {
 
     // App Normal Local
-    // "client_id": "uTLNa9VyuHLwp1Mw",
-    // "client_secret": "UDPNOmVYHUAdTwyV5RPlc5tcob7xRi2N",
-    // "redirect_uri": "http://localhost:3000/callback",
-    // "dialog_url": "http://localhost:2200/auth/dialog/authorize",
-    // "exchange_url": "http://localhost:2200/auth/tokens/exchange",    
+    "client_id": "uTLNa9VyuHLwp1Mw",
+    "client_secret": "UDPNOmVYHUAdTwyV5RPlc5tcob7xRi2N",
+    "redirect_uri": "http://localhost:3000/callback",
+    "dialog_url": "http://localhost:2200/auth/dialog/authorize",
+    "exchange_url": "http://localhost:2200/auth/tokens/exchange",    
 
     // App Normal Staging
     // "client_id": "vqPAAyfZhbQSHWjr",
@@ -15,11 +15,11 @@ module.exports = {
     // "exchange_url": "https://api.int.misfit.com/auth/tokens/exchange",
 
     // App Normal Production
-    "client_id": "tOtJyKb24RiocNrl",
-    "client_secret": "na5DZ1maBWUdNyRQ5S4xQWqsvt4p6EWC",
-    "redirect_uri": "http://localhost:3000/callback",
-    "dialog_url": "https://api.misfitwearables.com/auth/dialog/authorize",
-    "exchange_url": "https://api.misfitwearables.com/auth/tokens/exchange",
+    // "client_id": "tOtJyKb24RiocNrl",
+    // "client_secret": "na5DZ1maBWUdNyRQ5S4xQWqsvt4p6EWC",
+    // "redirect_uri": "http://localhost:3000/callback",
+    // "dialog_url": "https://api.misfitwearables.com/auth/dialog/authorize",
+    // "exchange_url": "https://api.misfitwearables.com/auth/tokens/exchange",
 
     "thirdparty": {
 
