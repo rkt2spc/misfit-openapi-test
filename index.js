@@ -20,10 +20,10 @@ router.get('/', (req, res, next) => res.status(200).end("OK"));
 //===========================================================
 // Oauth login: Get authorization_code
 router.get('/login', (req, res, next) => {
-    var url = configs.oauth.dialog_url;
+    var url = config.oauth.dialog_url;
     url += '?response_type=code' + '&';
-    url += `client_id=${configs.oauth.client_id}` + '&';
-    url += 'redirect_uri=' + configs.oauth.redirect_uri + '&';
+    url += `client_id=${config.oauth.client_id}` + '&';
+    url += 'redirect_uri=' + config.oauth.redirect_uri + '&';
     url += 'scope=public,birthday,email';
 
     res.redirect(url);
@@ -33,12 +33,12 @@ router.get('/login', (req, res, next) => {
 router.get('/callback', (req, res, next) => {
 
     request.post({
-        url: configs.oauth.exchange_url,
+        url: config.oauth.exchange_url,
         body: {
             grant_type: 'authorization_code',
-            client_id: configs.oauth.client_id,
-            client_secret: configs.oauth.client_secret,
-            redirect_uri: configs.oauth.redirect_uri,
+            client_id: config.oauth.client_id,
+            client_secret: config.oauth.client_secret,
+            redirect_uri: config.oauth.redirect_uri,
             code: req.query.code
         },
         json: true
@@ -54,11 +54,11 @@ router.get('/callback', (req, res, next) => {
 //===========================================================
 // Thirdparty OAuth login: Get authorization_code
 router.get('/login_thirdparty', (req, res, next) => {
-    var url = configs.oauth_thirdparty.dialog_url;
+    var url = config.oauth_thirdparty.dialog_url;
     url += '?response_type=code' + '&';
-    url += `client_id=${configs.oauth_thirdparty.client_id}` + '&';
-    url += `client_secret=${configs.oauth_thirdparty.client_secret}` + '&';
-    url += 'redirect_uri=' + configs.oauth_thirdparty.redirect_uri + '&';
+    url += `client_id=${config.oauth_thirdparty.client_id}` + '&';
+    url += `client_secret=${config.oauth_thirdparty.client_secret}` + '&';
+    url += 'redirect_uri=' + config.oauth_thirdparty.redirect_uri + '&';
     url += 'scope=public,birthday,email';
 
     res.redirect(url);    
@@ -67,12 +67,12 @@ router.get('/login_thirdparty', (req, res, next) => {
 // Thirdparty Oauth callback: Exchange authorization_code for token
 router.get('/callback_thirdparty', (req, res, next) => {
     request.post({
-        url: configs.oauth_thirdparty.exchange_url,
+        url: config.oauth_thirdparty.exchange_url,
         body: {
             grant_type: 'authorization_code',
-            client_id: configs.oauth_thirdparty.client_id,
-            client_secret: configs.oauth_thirdparty.client_secret,
-            redirect_uri: configs.oauth_thirdparty.redirect_uri,
+            client_id: config.oauth_thirdparty.client_id,
+            client_secret: config.oauth_thirdparty.client_secret,
+            redirect_uri: config.oauth_thirdparty.redirect_uri,
             code: req.query.code
         },
         json: true
