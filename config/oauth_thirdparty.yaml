@@ -1,0 +1,23 @@
+default:
+  client_id: uTLNa9VyuHLwp1Mw
+  client_secret: UDPNOmVYHUAdTwyV5RPlc5tcob7xRi2N
+  redirect_uri: http://localhost:3000/callback_thirdparty
+  dialog_url: http://localhost:2300/open/thirdparty/auth/dialog/authorize
+  exchange_url: http://localhost:2300/open/thirdparty/auth/tokens/exchange
+
+development:
+  client_id: uTLNa9VyuHLwp1Mw
+  client_secret: UDPNOmVYHUAdTwyV5RPlc5tcob7xRi2N
+  redirect_uri: http://localhost:3000/callback_thirdparty
+  dialog_url: http://localhost:2300/open/thirdparty/auth/dialog/authorize
+  exchange_url: http://localhost:2300/open/thirdparty/auth/tokens/exchange
+    
+staging:
+  client_id": vqPAAyfZhbQSHWjr
+  client_secret": Q9Z6lmeKuFCcjGlwwvkLMSJDmLCakA51
+  redirect_uri": http://localhost:3000/callback_thirdparty
+  dialog_url": https://api.int.misfit.com/open/thirdparty/auth/dialog/authorize
+  exchange_url": https://api.int.misfit.com/open/thirdparty/auth/tokens/exchange
+
+production:
+

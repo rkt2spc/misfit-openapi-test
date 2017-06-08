@@ -52,7 +52,7 @@ router.get('/callback', (req, res, next) => {
 });
 
 //===========================================================
-// Thirdparty OAuth
+// Thirdparty OAuth login: Get authorization_code
 router.get('/login_thirdparty', (req, res, next) => {
     var url = configs.oauth_thirdparty.dialog_url;
     url += '?response_type=code' + '&';
@@ -64,6 +64,7 @@ router.get('/login_thirdparty', (req, res, next) => {
     res.redirect(url);    
 });
 
+// Thirdparty Oauth callback: Exchange authorization_code for token
 router.get('/callback_thirdparty', (req, res, next) => {
     request.post({
         url: configs.oauth_thirdparty.exchange_url,
@@ -128,7 +129,6 @@ router.post('/subscription/endpoint', (req, res, next) => {
 //===========================================================
 var app = express();
 app.use(morgan('dev'));
-// app.use(bodyParser.raw());
 app.use(bodyParser.text());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
