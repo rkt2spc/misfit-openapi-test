@@ -90,7 +90,7 @@ router.get('/callback_thirdparty', (req, res, next) => {
 router.post('/subscription/endpoint', (req, res, next) => {
 
     console.log(">>> Request Body");
-    console.log(req.body);
+    console.log(JSON.parse(req.body));
 
     console.log(">>> Request Headers");
     console.log(req.headers);
