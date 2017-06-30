@@ -20,8 +20,12 @@ staging:
   exchange_url: https://api.int.misfit.com/auth/tokens/exchange
 
 production:
-  client_id: 7kEp62Au6ZE8rO8a
-  client_secret: UBjoUb3CYSWrsMeL0NbarDu28GmGHjzF
+  # Test App
+  # client_id: 7kEp62Au6ZE8rO8a
+  # client_secret: UBjoUb3CYSWrsMeL0NbarDu28GmGHjzF
+  # Test App V2
+  client_id: XswRowuXpEOAFUCd
+  client_secret: 0k04MNXl5ElaCpmU5gSAbIzOUsCkbJmT
   redirect_uri: http://localhost:3000/callback
   dialog_url: https://api.misfitwearables.com/auth/dialog/authorize
   exchange_url: https://api.misfitwearables.com/auth/tokens/exchange

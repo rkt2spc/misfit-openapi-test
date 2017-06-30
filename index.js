@@ -90,37 +90,33 @@ router.get('/callback_thirdparty', (req, res, next) => {
 router.post('/subscription/endpoint', (req, res, next) => {
 
     console.log(">>> Request Body");
-    console.log(JSON.parse(req.body));
-
+    console.log(req.body);
     console.log(">>> Request Headers");
     console.log(req.headers);
 
-    var message = req.body;
-    if (typeof message === 'string') message = JSON.parse(message);
-    var type = message.Type;
-    console.log('>>> Message type:', type);
+    // Request Body is sent as text/plain
+    var message = JSON.parse(req.body);
 
-    if (type === 'SubscriptionConfirmation') {
-
-        // console.log(req);
-
-        var subscribeURL = message.SubscribeURL;
-        var options = {
-            url: subscribeURL,
-            headers: { verify_token: message.Token }
-        };
-
-        console.log(">>> Replying to " + subscribeURL);
-        request.get(options, function (err, response, body) {
+    // Message Type is used to distinguish 
+    // between SubscriptionConfirmation and actual Notification
+    if (message.Type === 'SubscriptionConfirmation') {
+        // Send Confirmation Message
+        console.log(">>> Confirming subscription at " + message.SubscribeURL);
+        request.get({
+            url: message.SubscribeURL,
+            // headers: { verify_token: message.Token }
+        }, function (err, response, body) {
             if (err) {
                 return res.status(500).json(err.message);
             }
 
-            // console.log(response.body);
+            // Confirmation Success
+            console.log(response.body);
             return res.status(200).json({});
         });
     }
     else {
+        // Normal user data notifications
         console.log(message);
         res.status(200).json({});
     }
