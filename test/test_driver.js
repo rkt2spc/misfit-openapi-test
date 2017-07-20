@@ -1,28 +1,17 @@
-var utils = require('util');
-var uuid = require('uuid');
-var mongoose = require('mongoose');
-mongoose.Promise = global.Promise;
-mongoose.connect('mongodb://localhost:28000/test-db', () => {
-//>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+// var MongoClient = require('mongodb').MongoClient;
+// MongoClient.connect('mongodb://localhost:27017/test-db', function(err, db) {
+//   if (err) return console.log(err);  
+//   console.log("Connected successfully to server");
 
-var Schema = mongoose.Schema;
-var ThingSchema = new Schema({
-  prop: Schema.Types.ObjectId,
-});
-var Thing = mongoose.model('Thing', ThingSchema);
+//   var collection = db.collection('stuff');
+//   collection.insert({
+//     strink: Buffer.from([0, 0, 0, 1]).toString('ascii')
+//   }, function(err, result) {
+//     if (err) return console.log(err);
+//     console.log(result);
+//     db.close();  
+//   });
+// });
 
-var thing = new Thing({
-  prop: mongoose.Types.ObjectId(),//uuid.v4().replace(/-+/g, '')),
-  hehe: 'abcdef'
-});
-
-thing.save((err) => {
-  if (err) console.log(err);
-  console.log(typeof thing.prop.toString());
-});
-
-var x = thing.prop.toString();
-console.log(typeof thing.prop.toString());
-
-//>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
-});
+const sizeof = require('object-sizeof');
+console.log(sizeof(Buffer.from([1,2,3,4]).toString()));
