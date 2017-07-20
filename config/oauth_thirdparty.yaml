@@ -32,5 +32,5 @@ herokuprd:
   client_id: XswRowuXpEOAFUCd
   client_secret: 0k04MNXl5ElaCpmU5gSAbIzOUsCkbJmT
   redirect_uri: https://test-openapi.herokuapp.com/callback
-  dialog_url: https://api.int.misfit.com/open/thirdparty/auth/dialog/authorize
-  exchange_url: https://api.int.misfit.com/open/thirdparty/auth/tokens/exchange
+  dialog_url: https://api.misfitwearables.com/open/thirdparty/auth/dialog/authorize
+  exchange_url: https://api.misfitwearables.com/open/thirdparty/auth/tokens/exchange
