@@ -24,13 +24,13 @@ production:
 herokustg:
   client_id: vqPAAyfZhbQSHWjr
   client_secret: Q9Z6lmeKuFCcjGlwwvkLMSJDmLCakA51
-  redirect_uri": https://test-openapi.herokuapp.com/callback
-  dialog_url": https://api.int.misfit.com/open/thirdparty/auth/dialog/authorize
-  exchange_url": https://api.int.misfit.com/open/thirdparty/auth/tokens/exchange
+  redirect_uri: https://test-openapi.herokuapp.com/callback
+  dialog_url: https://api.int.misfit.com/open/thirdparty/auth/dialog/authorize
+  exchange_url: https://api.int.misfit.com/open/thirdparty/auth/tokens/exchange
 
 herokuprd:
   client_id: XswRowuXpEOAFUCd
   client_secret: 0k04MNXl5ElaCpmU5gSAbIzOUsCkbJmT
-  redirect_uri": https://test-openapi.herokuapp.com/callback
-  dialog_url": https://api.int.misfit.com/open/thirdparty/auth/dialog/authorize
-  exchange_url": https://api.int.misfit.com/open/thirdparty/auth/tokens/exchange
+  redirect_uri: https://test-openapi.herokuapp.com/callback
+  dialog_url: https://api.int.misfit.com/open/thirdparty/auth/dialog/authorize
+  exchange_url: https://api.int.misfit.com/open/thirdparty/auth/tokens/exchange
