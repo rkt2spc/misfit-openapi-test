@@ -1,17 +1,18 @@
-var morgan = require('morgan');
-var express = require('express');
-var request = require('request');
-var bodyParser = require('body-parser');
+const open = require('open');
+const express = require('express');
+const morgan = require('morgan');
+const request = require('request');
+const bodyParser = require('body-parser');
 
 //===========================================================
-var yamlConfig = require('node-yaml-config');
-var config = {
-    oauth: yamlConfig.load('config/oauth.yaml'),
-    oauth_thirdparty: yamlConfig.load('config/oauth_thirdparty.yaml'),
+const yamlConfig = require('node-yaml-config');
+const config = {
+  oauth: yamlConfig.load('config/oauth.yaml'),
+  oauth_thirdparty: yamlConfig.load('config/oauth_thirdparty.yaml'),
 };
 
 //===========================================================
-var router = express.Router();
+const router = express.Router();
 
 //===========================================================
 // Ping
@@ -61,7 +62,7 @@ router.get('/login_thirdparty', (req, res, next) => {
     url += 'redirect_uri=' + config.oauth_thirdparty.redirect_uri + '&';
     url += 'scope=public,birthday,email';
 
-    res.redirect(url);    
+    res.redirect(url);
 });
 
 // Thirdparty Oauth callback: Exchange authorization_code for token
@@ -97,7 +98,7 @@ router.post('/subscription/endpoint', (req, res, next) => {
     // Request Body is sent as text/plain
     var message = JSON.parse(req.body);
 
-    // Message Type is used to distinguish 
+    // Message Type is used to distinguish
     // between SubscriptionConfirmation and actual Notification
     if (message.Type === 'SubscriptionConfirmation') {
         // Send Confirmation Message
@@ -130,11 +131,25 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(router);
 app.use((err, req, res, next) => {
-    console.log(err);
-    res.status(500).end(err.message);
+  console.log(err);
+  res.status(500).json(err);
 });
 
 
 //===========================================================
 var PORT = process.env.PORT || 3000;
-app.listen(PORT, () => console.log('Server is listening on', `http://localhost:${PORT}`));
+app.listen(PORT, () => {
+  // Boot Message
+  console.log(`Server is listening on port ${PORT}`);
+  console.log('--------------------------------------\n');
+
+  // URLs
+  console.log(`http://localhost:${PORT}`);
+  console.log(`http://localhost:${PORT}/login`);
+  console.log(`http://localhost:${PORT}/login_thirdparty`);
+  console.log('--------------------------------------\n');
+
+
+  // Open Browser
+  open(`http://localhost:${PORT}`)
+});
