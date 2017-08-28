@@ -24,6 +24,7 @@
     "node-yaml-config": "0.0.4",
     "oauth": "^0.9.15",
     "object-sizeof": "^1.2.0",
+    "open": "0.0.5",
     "request": "^2.81.0",
     "uuid": "^3.0.1"
   }
