@@ -8,7 +8,6 @@ const bodyParser = require('body-parser');
 const yamlConfig = require('node-yaml-config');
 const config = {
   oauth: yamlConfig.load('config/oauth.yaml'),
-  oauth_thirdparty: yamlConfig.load('config/oauth_thirdparty.yaml'),
 };
 
 //===========================================================
@@ -40,40 +39,6 @@ router.get('/callback', (req, res, next) => {
             client_id: config.oauth.client_id,
             client_secret: config.oauth.client_secret,
             redirect_uri: config.oauth.redirect_uri,
-            code: req.query.code
-        },
-        json: true
-    },
-        (err, response, body) => {
-            if (err) return next(err);
-
-            console.log(body);
-            res.status(200).json(body);
-        });
-});
-
-//===========================================================
-// Thirdparty OAuth login: Get authorization_code
-router.get('/login_thirdparty', (req, res, next) => {
-    var url = config.oauth_thirdparty.dialog_url;
-    url += '?response_type=code' + '&';
-    url += `client_id=${config.oauth_thirdparty.client_id}` + '&';
-    url += `client_secret=${config.oauth_thirdparty.client_secret}` + '&';
-    url += 'redirect_uri=' + config.oauth_thirdparty.redirect_uri + '&';
-    url += 'scope=public,birthday,email';
-
-    res.redirect(url);
-});
-
-// Thirdparty Oauth callback: Exchange authorization_code for token
-router.get('/callback_thirdparty', (req, res, next) => {
-    request.post({
-        url: config.oauth_thirdparty.exchange_url,
-        body: {
-            grant_type: 'authorization_code',
-            client_id: config.oauth_thirdparty.client_id,
-            client_secret: config.oauth_thirdparty.client_secret,
-            redirect_uri: config.oauth_thirdparty.redirect_uri,
             code: req.query.code
         },
         json: true
@@ -146,9 +111,7 @@ app.listen(PORT, () => {
   // URLs
   console.log(`http://localhost:${PORT}`);
   console.log(`http://localhost:${PORT}/login`);
-  console.log(`http://localhost:${PORT}/login_thirdparty`);
   console.log('--------------------------------------\n');
-
 
   // Open Browser
   open(`http://localhost:${PORT}`)
