@@ -6,13 +6,13 @@ default:
   exchange_url: http://localhost:2300/open/thirdparty/auth/tokens/exchange
 
 development:
-    
+
 staging:
-  client_id": vqPAAyfZhbQSHWjr
-  client_secret": Q9Z6lmeKuFCcjGlwwvkLMSJDmLCakA51
-  redirect_uri": http://localhost:3000/callback_thirdparty
-  dialog_url": https://api.int.misfit.com/open/thirdparty/auth/dialog/authorize
-  exchange_url": https://api.int.misfit.com/open/thirdparty/auth/tokens/exchange
+  client_id: vqPAAyfZhbQSHWjr
+  client_secret: Q9Z6lmeKuFCcjGlwwvkLMSJDmLCakA51
+  redirect_uri: http://localhost:3000/callback_thirdparty
+  dialog_url: https://api.int.misfit.com/open/thirdparty/auth/dialog/authorize
+  exchange_url: https://api.int.misfit.com/open/thirdparty/auth/tokens/exchange
 
 production:
   client_id: XswRowuXpEOAFUCd
