@@ -128,7 +128,10 @@ router.post('/subscription/endpoint', (req, res, next) => {
 const MONITORING_KEY = process.env.MONITORING_KEY || 'rocketspacer';
 router.get('/monitoring', (req, res, next) => {
   if (req.headers.key !== MONITORING_KEY && req.query.key !== MONITORING_KEY) return res.status(401).end('( ͡° ͜ʖ ͡°) Nope');
-  res.status(200).json({ ...config });
+  res.status(200).json({
+    versions: process.versions,
+    config: config,
+  });
 });
 
 //===========================================================
