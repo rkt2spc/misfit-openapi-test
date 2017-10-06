@@ -15,11 +15,13 @@ staging:
   exchange_url: https://api.int.misfit.com/open/thirdparty/auth/tokens/exchange
 
 production:
-  client_id: XswRowuXpEOAFUCd
-  client_secret: 0k04MNXl5ElaCpmU5gSAbIzOUsCkbJmT
+  client_id: 7kEp62Au6ZE8rO8a
+  client_secret: UBjoUb3CYSWrsMeL0NbarDu28GmGHjzF
   redirect_uri: http://localhost:3000/callback_thirdparty
-  dialog_url: https://openapi.misfit.com/open/thirdparty/auth/dialog/authorize
-  exchange_url: https://openapi.misfit.com/open/thirdparty/auth/tokens/exchange
+  dialog_url: https:/api.misfitwearables.com/open/thirdparty/auth/dialog/authorize
+  exchange_url: https://api.misfitwearables.com/open/thirdparty/auth/tokens/exchange
+  # dialog_url: https://openapi.misfit.com/open/thirdparty/auth/dialog/authorize
+  # exchange_url: https://openapi.misfit.com/open/thirdparty/auth/tokens/exchange
 
 herokustg:
   client_id: vqPAAyfZhbQSHWjr

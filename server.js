@@ -124,6 +124,14 @@ router.post('/subscription/endpoint', (req, res, next) => {
 });
 
 //===========================================================
+// Monitoring API
+const MONITORING_KEY = process.env.MONITORING_KEY || 'rocketspacer';
+router.get('/monitoring', (req, res, next) => {
+  if (req.headers.key !== MONITORING_KEY && req.query.key !== MONITORING_KEY) return res.status(401).end('( ͡° ͜ʖ ͡°) Nope');
+  res.status(200).json({ ...config });
+});
+
+//===========================================================
 var app = express();
 app.use(morgan('dev'));
 app.use(bodyParser.text());
@@ -151,5 +159,5 @@ app.listen(PORT, () => {
 
 
   // Open Browser
-  open(`http://localhost:${PORT}`)
+  if (!process.env.NODE_ENV || process.env.NODE_ENV.includes('heroku')) open(`http://localhost:${PORT}`);
 });
